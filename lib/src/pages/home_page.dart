@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_square_control_states/src/animations/square_animation.dart';
+import 'package:flutter_square_control_states/src/services_provider/animation_service.dart';
 import 'package:flutter_square_control_states/src/widgets/square_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -7,6 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AnimationService animationService = Provider.of<AnimationService>(context);
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -18,7 +21,7 @@ class HomePage extends StatelessWidget {
             //SQUARE
             left: screenSize.width * 0.05,
             top: screenSize.height * 0.5,
-            child: SquareAnimation(child: const SquareWidget()),
+            child: const SquareAnimation(child: SquareWidget()),
           ),
           Positioned(
             //LEFT BUTTON
@@ -26,7 +29,9 @@ class HomePage extends StatelessWidget {
             bottom: screenSize.height * 0.05,
             child: FloatingActionButton(
               child: const Icon(Icons.keyboard_arrow_left_rounded),
-              onPressed: () {},
+              onPressed: () {
+                animationService.dir = "left";
+              },
             ),
           ),
           Positioned(
@@ -36,7 +41,9 @@ class HomePage extends StatelessWidget {
             bottom: screenSize.height * 0.05,
             child: FloatingActionButton(
               child: const Icon(Icons.keyboard_arrow_right_rounded),
-              onPressed: () {},
+              onPressed: () {
+                animationService.dir = "right";
+              },
             ),
           ),
           Positioned(
@@ -45,7 +52,9 @@ class HomePage extends StatelessWidget {
             bottom: screenSize.height * 0.05,
             child: FloatingActionButton(
               child: const Icon(Icons.keyboard_arrow_down_rounded),
-              onPressed: () {},
+              onPressed: () {
+                animationService.dir = "down";
+              },
             ),
           ),
           Positioned(
@@ -54,7 +63,9 @@ class HomePage extends StatelessWidget {
             bottom: screenSize.height * 0.05,
             child: FloatingActionButton(
               child: const Icon(Icons.keyboard_arrow_up_rounded),
-              onPressed: () {},
+              onPressed: () {
+                animationService.dir = "up";
+              },
             ),
           )
         ],
